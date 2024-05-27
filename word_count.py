@@ -46,9 +46,11 @@ class WordCount(object):
                 self.word2occur[word] = 1
 
     def display_sorted_word2occur(self):
+        word2occur_sorted = {}
         for w in sorted(self.word2occur, key=self.word2occur.get, reverse=True):
-            print(w + ': ' + str(self.word2occur[w]))
-            self.log.info(w + ': ' + str(self.word2occur[w]))
+            word2occur_sorted[w] = str(self.word2occur[w])
+
+        self.log.info(word2occur_sorted)
 
     @staticmethod
     def setup_logging(filename):
@@ -81,10 +83,8 @@ class WordCount(object):
 if __name__ == "__main__":
     try:
         file_input = str(sys.argv[1])
-        print("file_input: " + file_input)
 
         if os.path.isfile(file_input):
-            print(file_input + " exists")
             word_count = WordCount(file_input)
             word_count.word_count()
         else:
@@ -100,3 +100,4 @@ if __name__ == "__main__":
     except:
         print("GenericException occurred: " + traceback.format_exc())
         sys.exit(1)
+
